@@ -12,7 +12,7 @@ function App() {
         <TinyTextEditor
           setEditorState={setEditorState}
           defaultEditorValue={editorState}
-          heightInPX={200}
+          heightInPX={300}
           placeholder={"Write somtheing here..."}
         />
       </section>

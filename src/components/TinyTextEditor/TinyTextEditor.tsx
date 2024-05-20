@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import BundledEditor from "./BundledEditor";
 import useTinyTextEditor from "./useTinyTextEditor";
+
 interface Props {
   setEditorState: Dispatch<SetStateAction<string>>;
   defaultEditorValue: string;
@@ -14,6 +15,7 @@ const TinyTextEditor = ({
   defaultEditorValue,
   heightInPX,
   imageMaxSizeInMB = 1,
+  placeholder = "Write something here...",
 }: Props) => {
   const { editorRef, filePickerHandler } = useTinyTextEditor(imageMaxSizeInMB);
 
@@ -25,7 +27,7 @@ const TinyTextEditor = ({
         image_title={true}
         init={{
           statusbar: false,
-          placeholder: "Write something here...",
+
           file_picker_callback: (callback, value, meta) => {
             const editorContent = editorRef.current.getContent();
             filePickerHandler(callback, value, meta, editorContent);
@@ -44,6 +46,7 @@ const TinyTextEditor = ({
 
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          placeholder: placeholder,
         }}
         onEditorChange={setEditorState}
       />
