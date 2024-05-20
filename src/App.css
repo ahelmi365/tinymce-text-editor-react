@@ -18,10 +18,12 @@
 }
 
 .text-editor-container {
-  flex-basis: 45%;
+  flex-basis: 55%;
 }
 .preview-text-editor-container {
-  flex-basis: 45%;
+  flex-basis: 40%;
+  max-height: 630px;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {
