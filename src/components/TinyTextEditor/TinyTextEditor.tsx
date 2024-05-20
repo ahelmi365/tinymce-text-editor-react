@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import BundledEditor from "./BundledEditor";
 import useTinyTextEditor from "./useTinyTextEditor";
+import { initialValue } from "./initialValue";
 
 interface Props {
   setEditorState: Dispatch<SetStateAction<string>>;
@@ -18,13 +19,19 @@ const TinyTextEditor = ({
   placeholder = "Write something here...",
 }: Props) => {
   const { editorRef, filePickerHandler } = useTinyTextEditor(imageMaxSizeInMB);
-
+  // const log = () => {
+  //   if (editorRef.current) {
+  //     console.log(editorRef.current.getContent());
+  //   }
+  // };
   return (
     <>
       <BundledEditor
         onInit={(_evt, editor) => (editorRef.current = editor)}
         value={defaultEditorValue}
+        initialValue={initialValue}
         init={{
+          max_height: 650,
           statusbar: false,
           image_title: true,
           file_picker_callback: (callback, value, meta) => {
