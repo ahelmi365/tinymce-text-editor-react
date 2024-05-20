@@ -49,7 +49,7 @@ import "tinymce/plugins/table";
 // Content styles, including inline UI like fake cursors
 import "tinymce/skins/content/default/content";
 import "tinymce/skins/ui/oxide/content";
-
-export default function BundledEditor(props) {
-  return <Editor licenseKey="gpl" {...props} />;
+import { IAllProps } from "@tinymce/tinymce-react";
+export default function BundledEditor(props: IAllProps) {
+  return <Editor {...props} licenseKey="gpl" />;
 }

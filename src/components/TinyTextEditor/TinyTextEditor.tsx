@@ -24,13 +24,14 @@ const TinyTextEditor = ({
       <BundledEditor
         onInit={(_evt, editor) => (editorRef.current = editor)}
         value={defaultEditorValue}
-        image_title={true}
         init={{
           statusbar: false,
-
+          image_title: true,
           file_picker_callback: (callback, value, meta) => {
-            const editorContent = editorRef.current.getContent();
-            filePickerHandler(callback, value, meta, editorContent);
+            if (editorRef && editorRef.current) {
+              const editorContent = editorRef.current.getContent();
+              filePickerHandler(callback, value, meta, editorContent);
+            }
           },
           height: heightInPX,
           width: "100%",

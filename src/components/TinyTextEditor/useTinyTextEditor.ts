@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Editor } from "tinymce";
 
 export const getNumberOfImagesInContent = (value: string) => {
   const regex = /<img[^>]*>/g;
@@ -21,10 +22,10 @@ const isValidImageSize = (file: File, imageMaxSizeInMB: number) => {
 };
 
 const useTinyTextEditor = (imageMaxSizeInMB: number) => {
-  const editorRef = useRef(null);
+  const editorRef = useRef<Editor>();
 
   const filePickerHandler = (
-    callback: TFilePickerCallback,
+    callback: (value: string, meta?: Record<string, string>) => void,
     value: string,
     meta: IFileMeta,
     editorContent: string
@@ -63,7 +64,7 @@ const useTinyTextEditor = (imageMaxSizeInMB: number) => {
         // Validate file size
         if (!isValidImageSize(file, imageMaxSizeInMB)) {
           alert(
-            `Cannot accept image with size larger than ${imageMaxSizeInMB}`
+            `Cannot accept image with size larger than ${imageMaxSizeInMB}MB`
           );
           event.preventDefault();
           input.value = "";
@@ -73,7 +74,7 @@ const useTinyTextEditor = (imageMaxSizeInMB: number) => {
         const reader = new FileReader();
 
         reader.onload = function () {
-          callback(reader.result || "");
+          callback(reader.result as string);
           //   dispatch(setIsLoading(false));
         };
 
